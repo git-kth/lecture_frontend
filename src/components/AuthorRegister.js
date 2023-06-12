@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Constant from '../Constant/Constant';
-import { useNavigate } from 'react-router-dom';
 
-const Signin = ({ changeSigninHandler }) => {
-    const navigate = useNavigate();
+const AuthorRegister = () => {
     const [input, setInput] = useState({
-        id: '',
-        pw: '',
+        name: '',
+        birthDate: '',
+        deathDate: '',
     });
 
     const changeHandler = e => {
@@ -17,25 +16,21 @@ const Signin = ({ changeSigninHandler }) => {
         });
     };
 
-    const signin = () => {
+    const registerAuthor = () => {
         const data = JSON.stringify(input);
         axios
-            .post(Constant.BASE_URL + `/member/signin`, data, {
+            .post(Constant.BASE_URL + `/admin/author`, data, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
+                    Authorization: `Baerer ${window.localStorage.getItem('acc_tok')}`,
                 },
             })
-            .then(res => {
-                window.localStorage.setItem('acc_tok', res.data);
-                changeSigninHandler(true);
-                window.location.replace('/');
-                // navigate('/');
-            })
-            .catch(err => alert(err.response.data));
+            .then(_ => window.location.replace('/authors'))
+            .catch(err => alert(err));
     };
     return (
         <>
-            <h2>로그인</h2>
+            <h2>Author Register</h2>
             <form method="post">
                 <>
                     <table>
@@ -43,9 +38,9 @@ const Signin = ({ changeSigninHandler }) => {
                             <td>
                                 <input
                                     type="text"
-                                    name="id"
-                                    placeholder="ID"
-                                    value={input['id']}
+                                    name="name"
+                                    placeholder="Name"
+                                    value={input['name']}
                                     onChange={changeHandler}
                                 />
                             </td>
@@ -53,10 +48,21 @@ const Signin = ({ changeSigninHandler }) => {
                         <tr>
                             <td>
                                 <input
-                                    type="password"
-                                    name="pw"
-                                    placeholder="PW"
-                                    value={input['pw']}
+                                    type="date"
+                                    name="birthDate"
+                                    placeholder="BirthDate"
+                                    value={input['birthDate']}
+                                    onChange={changeHandler}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="date"
+                                    name="deathDate"
+                                    placeholder="DeathDate"
+                                    value={input['deathDate']}
                                     onChange={changeHandler}
                                 />
                             </td>
@@ -64,10 +70,10 @@ const Signin = ({ changeSigninHandler }) => {
                     </table>
                     <input
                         type="submit"
-                        value="로그인"
+                        value="등록"
                         onClick={e => {
                             e.preventDefault();
-                            signin();
+                            registerAuthor();
                         }}
                     />
                 </>
@@ -76,4 +82,4 @@ const Signin = ({ changeSigninHandler }) => {
     );
 };
 
-export default Signin;
+export default AuthorRegister;

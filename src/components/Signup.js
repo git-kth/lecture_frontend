@@ -26,7 +26,7 @@ const Signup = () => {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             })
-            .then(_ => navigate('/'))
+            .then(_ => navigate('/signin'))
             .catch(err => alert(err.response.data));
     };
     return (
