@@ -12,7 +12,7 @@ const Book = () => {
             axios
                 .delete(Constant.BASE_URL + `/admin/book?id=${book_id}`, {
                     headers: {
-                        Authorization: `Baerer ${window.localStorage.getItem('acc_tok')}`,
+                        Authorization: `Bearer ${window.localStorage.getItem('acc_tok')}`,
                     },
                 })
                 .then(_ => window.location.replace('/books'))
@@ -22,12 +22,7 @@ const Book = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             const response = await axios.get(
-                Constant.BASE_URL + `/admin/book?page=${currentPage}`,
-                {
-                    headers: {
-                        Authorization: `Baerer ${window.localStorage.getItem('acc_tok')}`,
-                    },
-                },
+                Constant.BASE_URL + `/member/book?page=${currentPage}`,
             );
             setBooks(response.data.content);
         };

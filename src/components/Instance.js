@@ -21,7 +21,7 @@ const Instance = () => {
     useEffect(() => {
         const fetchInstances = async () => {
             const response = await axios.get(
-                Constant.BASE_URL + `/admin/bookinstance?page=${currentPage}`,
+                Constant.BASE_URL + `/member/bookinstance?page=${currentPage}`,
                 {
                     headers: {
                         Authorization: `Baerer ${window.localStorage.getItem('acc_tok')}`,

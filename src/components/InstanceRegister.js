@@ -31,7 +31,7 @@ const InstanceRegister = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const response = await axios.get(Constant.BASE_URL + `/admin/book`, {
+            const response = await axios.get(Constant.BASE_URL + `/member/book`, {
                 headers: {
                     Authorization: `Baerer ${window.localStorage.getItem('acc_tok')}`,
                 },

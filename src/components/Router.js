@@ -13,6 +13,10 @@ import BookInstance from './Instance';
 import Instance from './Instance';
 import InstanceRegister from './InstanceRegister';
 import InstanceUpdate from './InstanceUpdate';
+import BookList from './Normal/BookList';
+import InstanceList from './Normal/InstanceList';
+import MyBorrow from './Normal/MyBorrow';
+import AllBorrow from './Normal/AllBorrow';
 
 const Router = ({ isLogin, isAdmin, changeSigninHandler }) => {
     return (
@@ -23,97 +27,44 @@ const Router = ({ isLogin, isAdmin, changeSigninHandler }) => {
                 path="/signin"
                 element={isLogin ? <Home /> : <Signin changeSigninHandler={changeSigninHandler} />}
             />
+
+            <Route path="/all-book" element={<BookList />} />
+            <Route path="/all-instance/:book_id" element={<InstanceList isLogin={isLogin} />} />
             <Route
-                path="/books"
+                path="/myloan"
                 element={
-                    isLogin && isAdmin ? (
-                        <Book />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
+                    isLogin ? <MyBorrow /> : <Signin changeSigninHandler={changeSigninHandler} />
                 }
             />
+            <Route path="/allloan" element={isLogin && isAdmin ? <AllBorrow /> : <Home />} />
+            <Route path="/books" element={isLogin && isAdmin ? <Book /> : <Home />} />
             <Route
                 path="/book/register"
-                element={
-                    isLogin && isAdmin ? (
-                        <BookRegister />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
+                element={isLogin && isAdmin ? <BookRegister /> : <Home />}
             />
             <Route
                 path="/book/update/:id"
-                element={
-                    isLogin && isAdmin ? (
-                        <BookUpdate />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
+                element={isLogin && isAdmin ? <BookUpdate /> : <Home />}
             />
 
-            <Route
-                path="/authors"
-                element={
-                    isLogin && isAdmin ? (
-                        <Author />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
-            />
+            <Route path="/authors" element={isLogin && isAdmin ? <Author /> : <Home />} />
             <Route
                 path="/author/register"
-                element={
-                    isLogin && isAdmin ? (
-                        <AuthorRegister />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
+                element={isLogin && isAdmin ? <AuthorRegister /> : <Home />}
             />
             <Route
                 path="/author/update/:id"
-                element={
-                    isLogin && isAdmin ? (
-                        <AuthorUpdate />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
+                element={isLogin && isAdmin ? <AuthorUpdate /> : <Home />}
             />
 
-            <Route
-                path="/instances"
-                element={
-                    isLogin && isAdmin ? (
-                        <Instance />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
-            />
+            <Route path="/instances" element={isLogin && isAdmin ? <Instance /> : <Home />} />
             <Route
                 path="/instance/register"
-                element={
-                    isLogin && isAdmin ? (
-                        <InstanceRegister />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
+                element={isLogin && isAdmin ? <InstanceRegister /> : <Home />}
             />
             <Route
                 path="/instance/update/:id"
-                element={
-                    isLogin && isAdmin ? (
-                        <InstanceUpdate />
-                    ) : (
-                        <Signin changeSigninHandler={changeSigninHandler} />
-                    )
-                }
+                element={isLogin && isAdmin ? <InstanceUpdate /> : <Home />}
             />
             <Route path="/*" element={<NotFound />} />
         </Routes>

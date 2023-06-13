@@ -8,18 +8,18 @@ const Sidebar = ({ isLogin, member, changeSigninHandler }) => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <a href="">All books</a>
+                    <a href="/all-book">All books</a>
                 </li>
-                <li>
+                {/* <li>
                     <a href="">All authors</a>
-                </li>
+                </li> */}
             </ul>
             <ul class="sidebar-nav">
                 {isLogin ? (
                     <>
                         <li>User: {member['name']}</li>
                         <li>
-                            <Link to="/">My Borrowed</Link>
+                            <Link to="/myloan">My Borrowed</Link>
                         </li>
                         <li>
                             <a
@@ -39,7 +39,7 @@ const Sidebar = ({ isLogin, member, changeSigninHandler }) => {
                                     <hr />
                                     <li>Admin</li>
                                     <li>
-                                        <Link to="/">All Borrowed</Link>
+                                        <Link to="/allloan">All Borrowed</Link>
                                     </li>
                                     <li>
                                         <Link to="/books">Book</Link>

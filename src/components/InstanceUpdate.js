@@ -39,7 +39,7 @@ const InstanceUpdate = () => {
                 });
                 setInstance(response.data);
             } catch (err) {
-                alert(err);
+                alert(err.response.data);
             }
         };
         fetchInstance();

@@ -22,7 +22,7 @@ const Author = () => {
     useEffect(() => {
         const fetchAuthors = async () => {
             const response = await axios.get(
-                Constant.BASE_URL + `/admin/author?page=${currentPage}`,
+                Constant.BASE_URL + `/member/author?page=${currentPage}`,
                 {
                     headers: {
                         Authorization: `Baerer ${window.localStorage.getItem('acc_tok')}`,
